@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dhruvil Parekh — Lead QA Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0A0A0F;
+  --bg2:#111118;
+  --bg3:#16161F;
+  --card:#1A1A25;
+  --border:#2A2A3A;
+  --border2:#353548;
+  --accent:#00E5C3;
+  --accent2:#7B5EFF;
+  --accent3:#FF6B6B;
+  --text:#F0F0F8;
+  --muted:#9090A8;
+  --dim:#5A5A70;
+  --font-head:'Syne',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'DM Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.7;overflow-x:hidden}
+::selection{background:var(--accent);color:#000}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+/* NOISE OVERLAY */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");opacity:.4;pointer-events:none;z-index:0}
+
+/* GRID LINES */
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:80px 80px;opacity:.15;pointer-events:none;z-index:0}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,15,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--font-head);font-size:18px;font-weight:800;letter-spacing:-0.02em;color:var(--text)}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{font-size:13px;font-family:var(--font-mono);color:var(--muted);text-decoration:none;transition:color .2s;letter-spacing:0.05em}
+.nav-links a:hover{color:var(--accent)}
+.nav-badge{font-size:11px;font-family:var(--font-mono);background:rgba(0,229,195,0.1);color:var(--accent);border:1px solid rgba(0,229,195,0.25);padding:4px 10px;border-radius:999px}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 2rem 80px;position:relative;overflow:hidden}
+.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(123,94,255,0.12) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none;animation:pulse 6s ease-in-out infinite}
+.hero-glow2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,195,0.08) 0%,transparent 70%);bottom:0;left:-80px;pointer-events:none;animation:pulse 8s ease-in-out infinite reverse}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.1);opacity:.7}}
+.hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:1.5rem;animation:fadeUp .8s ease both}
+.hero-eyebrow span{font-family:var(--font-mono);font-size:12px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase}
+.hero-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-name{font-family:var(--font-head);font-size:clamp(52px,8vw,96px);font-weight:800;line-height:0.95;letter-spacing:-0.04em;margin-bottom:1.5rem;animation:fadeUp .8s .1s ease both}
+.hero-name .line2{color:var(--accent);display:block}
+.hero-title{font-size:clamp(18px,2.5vw,24px);color:var(--muted);font-weight:300;margin-bottom:2rem;animation:fadeUp .8s .2s ease both;max-width:600px;line-height:1.5}
+.hero-title strong{color:var(--text);font-weight:500}
+.hero-stats{display:flex;gap:2.5rem;margin-bottom:3rem;animation:fadeUp .8s .3s ease both;flex-wrap:wrap}
+.stat{border-left:2px solid var(--accent);padding-left:1rem}
+.stat-num{font-family:var(--font-head);font-size:36px;font-weight:800;color:var(--text);line-height:1}
+.stat-label{font-size:12px;color:var(--muted);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.08em}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .8s .4s ease both}
+.btn-primary{background:var(--accent);color:#000;padding:14px 28px;border-radius:4px;font-family:var(--font-head);font-weight:700;font-size:14px;text-decoration:none;letter-spacing:0.02em;transition:transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,229,195,0.3)}
+.btn-secondary{background:transparent;color:var(--text);padding:14px 28px;border-radius:4px;border:1px solid var(--border2);font-family:var(--font-head);font-weight:600;font-size:14px;text-decoration:none;transition:border-color .2s,background .2s}
+.btn-secondary:hover{border-color:var(--accent);background:rgba(0,229,195,0.05)}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;animation:fadeUp 1s .8s ease both;opacity:.5}
+.hero-scroll span{font-size:11px;font-family:var(--font-mono);color:var(--muted);letter-spacing:0.1em}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--muted),transparent);animation:scrollDown 2s infinite}
+@keyframes scrollDown{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* SECTIONS */
+section{padding:100px 2rem;position:relative;z-index:1}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+.section-label::before{content:'';display:block;width:24px;height:1px;background:var(--accent)}
+.section-title{font-family:var(--font-head);font-size:clamp(32px,5vw,52px);font-weight:800;letter-spacing:-0.03em;margin-bottom:3rem;line-height:1.05}
+.section-title em{color:var(--accent);font-style:normal}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.skill-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.5rem;transition:border-color .3s,transform .3s}
+.skill-card:hover{border-color:var(--border2);transform:translateY(-4px)}
+.skill-card-icon{font-size:24px;margin-bottom:12px}
+.skill-card-title{font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px;letter-spacing:0.02em;text-transform:uppercase}
+.skill-tags{display:flex;flex-wrap:wrap;gap:6px}
+.stag{font-size:11px;font-family:var(--font-mono);padding:3px 8px;border-radius:3px;border:1px solid var(--border2);color:var(--muted)}
+.stag.accent{border-color:rgba(0,229,195,0.4);color:var(--accent);background:rgba(0,229,195,0.06)}
+
+/* TIMELINE / EXPERIENCE */
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),var(--accent2),transparent)}
+.tl-item{position:relative;margin-bottom:3rem;padding-left:1.5rem}
+.tl-dot{position:absolute;left:-2rem;top:6px;width:10px;height:10px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 0 3px rgba(0,229,195,0.2)}
+.tl-date{font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.1em;margin-bottom:6px}
+.tl-role{font-family:var(--font-head);font-size:20px;font-weight:700;color:var(--text);margin-bottom:2px}
+.tl-company{font-size:14px;color:var(--muted);margin-bottom:12px}
+.tl-points{list-style:none}
+.tl-points li{font-size:14px;color:var(--muted);padding:4px 0;padding-left:16px;position:relative;line-height:1.65}
+.tl-points li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:12px}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.5rem;position:relative;overflow:hidden;transition:border-color .3s,transform .3s;cursor:default}
+.proj-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,229,195,0.03) 0%,transparent 60%);opacity:0;transition:opacity .3s}
+.proj-card:hover{border-color:rgba(0,229,195,0.4);transform:translateY(-4px)}
+.proj-card:hover::before{opacity:1}
+.proj-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.proj-icon{font-size:28px}
+.proj-domain{font-size:10px;font-family:var(--font-mono);color:var(--dim);letter-spacing:0.05em;text-align:right;line-height:1.6}
+.proj-name{font-family:var(--font-head);font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.3}
+.proj-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.ptag{font-size:10px;font-family:var(--font-mono);padding:2px 7px;border-radius:3px;background:rgba(255,255,255,0.05);color:var(--dim);border:1px solid var(--border)}
+.ptag.hot{background:rgba(0,229,195,0.08);color:var(--accent);border-color:rgba(0,229,195,0.2)}
+.proj-impact{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.imp{font-size:10px;font-family:var(--font-mono);color:var(--accent);background:rgba(0,229,195,0.08);border:1px solid rgba(0,229,195,0.2);padding:3px 8px;border-radius:3px}
+.proj-divider{height:1px;background:var(--border);margin-bottom:12px}
+.proj-text{font-size:13px;color:var(--muted);line-height:1.75;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+.proj-card.expanded .proj-text{-webkit-line-clamp:unset}
+.proj-toggle{margin-top:10px;font-size:12px;font-family:var(--font-mono);color:var(--accent);cursor:pointer;background:none;border:none;padding:0;display:flex;align-items:center;gap:4px}
+
+/* ACHIEVEMENTS */
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.ach-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.5rem;text-align:center;transition:border-color .3s,transform .3s}
+.ach-card:hover{border-color:rgba(123,94,255,0.4);transform:translateY(-4px)}
+.ach-num{font-family:var(--font-head);font-size:48px;font-weight:800;color:var(--accent2);line-height:1;margin-bottom:6px}
+.ach-num span{font-size:24px}
+.ach-desc{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* CERTIFICATIONS */
+.cert-row{display:flex;flex-wrap:wrap;gap:12px}
+.cert{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem 1.5rem;transition:border-color .3s}
+.cert:hover{border-color:rgba(0,229,195,0.4)}
+.cert-icon{width:36px;height:36px;background:rgba(0,229,195,0.1);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.cert-name{font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--text)}
+.cert-org{font-size:12px;color:var(--muted)}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.contact-text{font-size:18px;color:var(--muted);line-height:1.7;font-weight:300}
+.contact-text strong{color:var(--text);font-weight:500}
+.contact-links{display:flex;flex-direction:column;gap:12px}
+.contact-link{display:flex;align-items:center;gap:12px;padding:1rem 1.25rem;background:var(--card);border:1px solid var(--border);border-radius:6px;text-decoration:none;color:var(--text);font-size:14px;transition:border-color .3s,transform .2s;font-family:var(--font-mono)}
+.contact-link:hover{border-color:var(--accent);transform:translateX(4px);color:var(--accent)}
+.contact-link-icon{font-size:16px;width:20px;text-align:center}
+
+/* FOOTER */
+footer{padding:2rem;text-align:center;border-top:1px solid var(--border);position:relative;z-index:1}
+footer p{font-size:12px;font-family:var(--font-mono);color:var(--dim)}
+footer span{color:var(--accent)}
+
+/* ANIMATE ON SCROLL */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* CURSOR GLOW */
+.cursor-glow{position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,195,0.04) 0%,transparent 70%);pointer-events:none;z-index:0;transition:transform .1s linear;transform:translate(-50%,-50%)}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{padding:.75rem 1rem}
+  .nav-links{display:none}
+  section{padding:60px 1rem}
+  .hero{padding:100px 1rem 60px}
+  .contact-grid{grid-template-columns:1fr}
+  .hero-stats{gap:1.5rem}
+  .timeline{padding-left:1.5rem}
+  .tl-dot{left:-1.5rem}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">DP<span>.</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-badge">Open to Work</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <div class="hero-dot"></div>
+      <span>ISTQB Certified Lead QA Engineer</span>
+    </div>
+    <h1 class="hero-name">
+      Dhruvil
+      <span class="line2">Parekh.</span>
+    </h1>
+    <p class="hero-title">
+      I don't just find bugs — I build the frameworks that prevent them.<br/>
+      <strong>9.5+ years</strong> ensuring zero critical defects across MedTech, Blockchain, IoT, Payments &amp; VR.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">20<span style="font-size:20px;color:var(--accent)">+</span></div>
+        <div class="stat-label">Major releases, zero critical incidents</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">60<span style="font-size:20px;color:var(--accent)">%</span></div>
+        <div class="stat-label">Regression cycle reduction</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">15<span style="font-size:20px;color:var(--accent)">+</span></div>
+        <div class="stat-label">QA engineers mentored</div>
+      </div>
+    </div>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View Case Studies ↓</a>
+      <a href="#contact" class="btn-secondary">Get in touch</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner reveal">
+    <div class="section-label">What I bring</div>
+    <h2 class="section-title">Core <em>expertise</em></h2>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <div class="skill-card-icon">🏥</div>
+        <div class="skill-card-title">Medical &amp; Regulatory</div>
+        <div class="skill-tags">
+          <span class="stag accent">FDA 21 CFR</span>
+          <span class="stag accent">HIPAA</span>
+          <span class="stag accent">HL7 / FHIR</span>
+          <span class="stag accent">11073 SDC</span>
+          <span class="stag">Class I &amp; II Devices</span>
+          <span class="stag">Traceability Matrix</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-icon">🧪</div>
+        <div class="skill-card-title">Testing Methods</div>
+        <div class="skill-tags">
+          <span class="stag accent">Risk-Based Testing</span>
+          <span class="stag">BVA</span>
+          <span class="stag">Equivalence Partitioning</span>
+          <span class="stag">Decision Tables</span>
+          <span class="stag">Regression</span>
+          <span class="stag">Integration</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-icon">🔌</div>
+        <div class="skill-card-title">API &amp; Backend</div>
+        <div class="skill-tags">
+          <span class="stag accent">REST APIs</span>
+          <span class="stag accent">SOAP</span>
+          <span class="stag accent">Postman</span>
+          <span class="stag">JSON / XML</span>
+          <span class="stag">MySQL</span>
+          <span class="stag">PostgreSQL</span>
+          <span class="stag">SQL Validation</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-icon">💳</div>
+        <div class="skill-card-title">Payment Systems</div>
+        <div class="skill-tags">
+          <span class="stag accent">Verifone</span>
+          <span class="stag accent">FreedomPay</span>
+          <span class="stag accent">Clover</span>
+          <span class="stag">NFC</span>
+          <span class="stag">Digital Wallets</span>
+          <span class="stag">POS Integration</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-icon">☁️</div>
+        <div class="skill-card-title">Platforms &amp; Tools</div>
+        <div class="skill-tags">
+          <span class="stag accent">JIRA</span>
+          <span class="stag accent">TestRail</span>
+          <span class="stag">MatrixALM</span>
+          <span class="stag">Charles Proxy</span>
+          <span class="stag">AWS S3</span>
+          <span class="stag">Kubernetes</span>
+          <span class="stag">Confluence</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-icon">📱</div>
+        <div class="skill-card-title">Platforms Tested</div>
+        <div class="skill-tags">
+          <span class="stag accent">iOS &amp; Android</span>
+          <span class="stag">Windows / macOS</span>
+          <span class="stag">Kiosk OS</span>
+          <span class="stag">Oculus OS</span>
+          <span class="stag">GearVR</span>
+          <span class="stag">Linux</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section style="padding-top:0">
+  <div class="section-inner reveal">
+    <div class="section-label">By the numbers</div>
+    <h2 class="section-title">Impact at <em>scale</em></h2>
+    <div class="ach-grid">
+      <div class="ach-card">
+        <div class="ach-num">20<span>+</span></div>
+        <div class="ach-desc">Major releases led across healthcare, financial, and retail sectors — zero critical production incidents</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num">60<span>%</span></div>
+        <div class="ach-desc">Reduction in regression cycles through optimized test strategies and risk-based prioritization</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num">15<span>+</span></div>
+        <div class="ach-desc">QA engineers mentored across medical devices, payments, blockchain, and VR/AR platforms</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num">31<span>%</span></div>
+        <div class="ach-desc">Team efficiency improvement through structured defect reporting and QA metrics tracking</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner reveal">
+    <div class="section-label">Career</div>
+    <h2 class="section-title">Where I've <em>worked</em></h2>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">OCT 2024 — PRESENT</div>
+        <div class="tl-role">Lead QA Engineer</div>
+        <div class="tl-company">GRUBBRR · Ahmedabad, India</div>
+        <ul class="tl-points">
+          <li>Own full-cycle QA for kiosk software, self-ordering apps, POS integrations, and loyalty systems</li>
+          <li>Built payment verification framework across 10+ methods — zero production payment defects to date</li>
+          <li>REST API testing via Postman covering payment gateway and POS integrations</li>
+          <li>Mentoring 6 junior QA engineers, boosting team execution efficiency by 20%</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--accent2)"></div>
+        <div class="tl-date">JAN 2024 — OCT 2024</div>
+        <div class="tl-role">Lead QA Engineer</div>
+        <div class="tl-company">AimDek Technology · Ahmedabad, India</div>
+        <ul class="tl-points">
+          <li>Led full QA lifecycle for Class I &amp; II medical devices including Sibel Health wearables</li>
+          <li>Designed clinical data workflow tests covering HL7, FHIR, and 11073 SDC standards</li>
+          <li>30% reduction in regulatory defects through risk assessments and traceability matrices</li>
+          <li>Monitored Kubernetes cluster logs, improving system uptime by 15%</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--accent3)"></div>
+        <div class="tl-date">MAR 2021 — DEC 2023</div>
+        <div class="tl-role">Senior QA Engineer</div>
+        <div class="tl-company">Apexon · Ahmedabad, India</div>
+        <ul class="tl-points">
+          <li>Tested 20+ REST/SOAP API endpoints across health devices, lifestyle apps, and financial platforms</li>
+          <li>Led QA for blockchain platform — smart contracts, token transactions, ledger integrity</li>
+          <li>12 consecutive major releases with zero defect leakage</li>
+          <li>Awarded "Bright Spark" for outstanding quality contributions</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--muted)"></div>
+        <div class="tl-date">SEP 2019 — MAR 2021</div>
+        <div class="tl-role">Senior QA Specialist</div>
+        <div class="tl-company">CheckTech for Information Technology · Riyadh, Saudi Arabia</div>
+        <ul class="tl-points">
+          <li>Authored 200+ manual test cases for platforms serving 500K+ active users</li>
+          <li>UI/UX quality checks across 100+ screens — contributed to 20% increase in user satisfaction</li>
+          <li>Boosted team productivity by 31% through structured defect reporting workflows</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--dim)"></div>
+        <div class="tl-date">JAN 2016 — AUG 2019</div>
+        <div class="tl-role">Software Tester</div>
+        <div class="tl-company">Lodestone (acquired by Tech Mahindra) · Ahmedabad, India</div>
+        <ul class="tl-points">
+          <li>Ran comprehensive Oculus OS qualification across GearVR, Go, Quest, and Rift</li>
+          <li>Owned build sign-off for 50+ VR applications across all build pipeline types</li>
+          <li>Resolved 200+ critical OS defects — cut test execution time by 35%</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner reveal">
+    <div class="section-label">Case Studies</div>
+    <h2 class="section-title">Projects I've <em>shaped</em></h2>
+    <div class="projects-grid" id="projectsGrid"></div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section style="padding-top:0">
+  <div class="section-inner reveal">
+    <div class="section-label">Credentials</div>
+    <h2 class="section-title">Education &amp; <em>certs</em></h2>
+    <div class="cert-row">
+      <div class="cert">
+        <div class="cert-icon">🏆</div>
+        <div>
+          <div class="cert-name">ISTQB Certified Tester</div>
+          <div class="cert-org">Foundation Level · March 2025</div>
+        </div>
+      </div>
+      <div class="cert">
+        <div class="cert-icon">🎓</div>
+        <div>
+          <div class="cert-name">MCA</div>
+          <div class="cert-org">Gujarat Technological University · 2015</div>
+        </div>
+      </div>
+      <div class="cert">
+        <div class="cert-icon">📚</div>
+        <div>
+          <div class="cert-name">BCA</div>
+          <div class="cert-org">GLS Institute of Computer Technology · 2013</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner reveal">
+    <div class="section-label">Let's talk</div>
+    <h2 class="section-title">Get in <em>touch</em></h2>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-text">
+          I'm a <strong>Lead QA Engineer</strong> with 9.5+ years of hands-on experience building test strategies that protect products people depend on — from hospital-grade wearables to high-traffic kiosks.<br/><br/>
+          Whether you need someone to <strong>own quality from strategy through release</strong>, build a QA practice from scratch, or mentor a team — let's talk.
+        </p>
+      </div>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:dhruvil.parekh3@gmail.com">
+          <span class="contact-link-icon">✉</span>
+          dhruvil.parekh3@gmail.com
+        </a>
+        <a class="contact-link" href="tel:+918000164009">
+          <span class="contact-link-icon">📱</span>
+          +91 8000164009
+        </a>
+        <a class="contact-link" href="https://linkedin.com/in/dhruvilparekh" target="_blank">
+          <span class="contact-link-icon">💼</span>
+          linkedin.com/in/dhruvilparekh
+        </a>
+        <a class="contact-link" href="#" style="border-color:rgba(0,229,195,0.4);color:var(--accent)">
+          <span class="contact-link-icon">📄</span>
+          Download Resume (PDF)
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed &amp; built for <span>Dhruvil Parekh</span> · Lead QA Engineer · Ahmedabad, India · 2025</p>
+</footer>
+
+<script>
+// Cursor glow
+const glow=document.getElementById('cursorGlow');
+document.addEventListener('mousemove',e=>{
+  glow.style.left=e.clientX+'px';
+  glow.style.top=e.clientY+'px';
+});
+
+// Scroll reveal
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('visible')}
+  });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// Projects data
+const projects=[
+  {
+    icon:'🩺',
+    name:'Sibel Health — FDA-Regulated Wearable Device Validation',
+    domain:'MedTech · Class I & II · FDA',
+    tags:['FDA 21 CFR','HIPAA','HL7 / FHIR','11073 SDC','Traceability Matrix'],
+    hot:[0,1,2],
+    impact:['30% fewer regulatory defects','Zero compliance gaps'],
+    text:'When a wearable biosensor patch is designed for hospital-grade patient monitoring — capturing ECG, respiratory rate, and SpO2 in real time — the cost of a missed defect is not a user complaint. It is a patient safety event. I led the full QA validation lifecycle for Sibel Health\'s Class I and II medical devices, building verification protocols from the ground up under FDA 21 CFR Part 11 and HIPAA requirements. Every data exchange between the sensor, the clinical gateway, and the cloud platform was traced, tested, and documented. I wrote and owned the traceability matrices that mapped each requirement to a test case and each test result to a compliance checkpoint. The result: a 30% reduction in regulatory defects before submission, and a validation package that needed no rework.'
+  },
+  {
+    icon:'🥽',
+    name:'Meta (Oculus) — VR/AR OS & Hardware Qualification',
+    domain:'VR/AR · Oculus · Firmware',
+    tags:['OS Qualification','Firmware Testing','Sensor Calibration','Build Sign-off','Performance Regression'],
+    hot:[0,1],
+    impact:['200+ critical defects resolved','35% faster cycles','50+ builds signed off'],
+    text:'When head tracking drifts by half a degree, users experience nausea. When a firmware update silently remaps controller input, a game becomes unplayable. I owned end-to-end OS qualification across four Oculus device generations — GearVR, Go, Quest, and Rift — each with its own firmware stack, sensor array, and controller generation. My responsibility was build sign-off: no release left without my confirmation that system UI integrity, motion sensor calibration, wireless connectivity, and the permission model all worked exactly as specified. I identified root causes for and resolved over 200 critical OS defects during performance regression cycles, cutting test execution time by 35% through optimized triage workflows.'
+  },
+  {
+    icon:'⛓️',
+    name:'Blockchain Platform — Smart Contract & Ledger Integrity',
+    domain:'Fintech · DLT · Smart Contracts',
+    tags:['Smart Contracts','Ledger Integrity','Token Workflows','Edge-Case Failures','REST API'],
+    hot:[0,1,2],
+    impact:['12 consecutive zero-defect releases','20+ API endpoints covered'],
+    text:'Blockchain has a property that makes QA uniquely unforgiving: you cannot roll back a production defect. There is no database patch, no hotfix that undoes a corrupted on-chain state. I led QA for a distributed ledger platform handling digital asset transactions and smart contract execution — verifying not just that contracts executed, but that they executed correctly under every failure condition. Re-entrancy guard behavior, gas estimation failures, partial transaction states, mint-transfer-burn-rollback sequences — each was documented, tested, and retested. Across 12 consecutive major releases, we shipped with zero defect leakage.'
+  },
+  {
+    icon:'🚗',
+    name:'ETL Vehicle Insurance — Data Pipeline Validation',
+    domain:'Insurance · ETL · SQL',
+    tags:['ETL Pipeline','SQL Validation','Data Transformation','Row-Count Reconciliation','Data Lineage'],
+    hot:[0,1],
+    impact:['End-to-end data lineage verified','Zero silent data loss'],
+    text:'ETL defects are dangerous precisely because they are quiet. A transformation rule that silently drops a decimal place, a load process that deduplicates where it should not — these do not throw errors. They produce clean-looking data that is wrong. And in vehicle insurance, wrong data means incorrect premiums and flawed claims processing at scale. I designed and executed QA strategy for a high-volume insurance ETL pipeline, tracing data lineage from source extraction through every transformation stage into the target schema — verifying field mappings, type conversions, business rule applications, and aggregation logic row by row.'
+  },
+  {
+    icon:'💉',
+    name:'OneTouch Blood Glucose App — Clinical Accuracy & Localization',
+    domain:'Digital Health · iOS & Android · L10n',
+    tags:['Clinical Accuracy','Localization','Report & Graph Testing','Unit Conversion','BLE Sync'],
+    hot:[0,1,2],
+    impact:['Multi-region localization validated','Zero reading sync errors'],
+    text:'A blood glucose monitoring app is not a lifestyle product. Every number it displays informs a dosing decision. A graph that misrepresents a patient\'s 90-day trend, a report that swaps units without proper conversion — these are clinical errors, not bugs. I owned the full reporting and visualization QA for the OneTouch platform across iOS and Android: verifying trend graph accuracy, statistical summaries, and A1C estimation calculations. Localization introduced a separate layer of clinical complexity — ensuring that clinical logic produces correct outputs in both mg/dL and mmol/L, that numeric formatting in charts respects locale conventions, and that Bluetooth reading sync is flawless.'
+  },
+  {
+    icon:'📍',
+    name:'CheckTech (شيِّك) — Real-Time Location Verification',
+    domain:'Location Services · Crowdsourcing · Real-Time',
+    tags:['Real-Time Location','Geo-Matching','Order Lifecycle','Concurrency Testing','In-App Chat'],
+    hot:[0,1,2],
+    impact:['200+ test cases authored','20% satisfaction uplift','500K+ users served'],
+    text:'CheckTech operates in a domain where real-time accuracy is not a quality metric — it is the product. Serving over 500,000 active users across the Middle East, the platform handles a continuous flow of location-based orders, dynamic Checker matching within geo-radius logic, real-time status transitions, live bidirectional chat, and photo-verified proof-of-presence submissions. I authored and executed over 200 manual test cases covering the complete order lifecycle, with particular attention to concurrency scenarios: what happens when three Checkers submit offers for the same order in the same second, or when a network interruption occurs mid-chat. My QA contributions correlate with a measured 20% improvement in user satisfaction scores.'
+  },
+  {
+    icon:'💓',
+    name:'BioIntelliSense BioHub Connect — Wearable Health Ecosystem',
+    domain:'Clinical IoT · BLE · Cloud · Dashboard',
+    tags:['BioButton Device','BLE Connectivity','Cloud Sync','Doctor Dashboard','FDA / HIPAA'],
+    hot:[0,1,3],
+    impact:['4-tier data chain validated','Clinical display accuracy confirmed'],
+    text:'The BioHub Connect ecosystem has four integration points to test, each of which must preserve the integrity of patient biometric data as it moves from body to cloud to clinician. The BioButton captures continuous vitals, transmits via BLE to the BioHub gateway, which forwards through a cloud platform to a physician dashboard used to make care decisions. I validated every tier: BLE pairing stability, cloud ingestion accuracy under intermittent connectivity, and clinical-grade precision on the physician dashboard. The central risk in multi-hop IoT architectures is silent corruption — a timestamp misalignment or aggregation error at one tier that propagates undetected to the clinical display.'
+  },
+  {
+    icon:'🖥️',
+    name:'GRUBBRR — Self-Ordering Kiosk & Omnichannel POS',
+    domain:'Retail Tech · Kiosk · Payments · POS',
+    tags:['Payment Validation','10+ Payment Methods','POS Integration','SQL Testing','REST API'],
+    hot:[0,1,2],
+    impact:['Zero production payment defects','10+ payment methods','50+ defects caught pre-prod'],
+    text:'At a stadium kiosk serving thousands of transactions per hour, a payment defect is not a support ticket. It is a line of frustrated customers, a missed sale, and a client relationship at risk. I own the full QA lifecycle at GRUBBRR across kiosk software, mobile ordering apps, POS integrations, digital menu boards, and loyalty systems. I built and executed a payment validation framework covering ten-plus payment modalities — Verifone, FreedomPay, Clover, NFC contactless, and major digital wallets — that has produced zero production payment defects across all client deployments to date. SQL-based database validation confirms order calculations, tax logic, and transaction records are accurate in the backend across thousands of daily transactions.'
+  }
+];
+
+const grid=document.getElementById('projectsGrid');
+projects.forEach((p,idx)=>{
+  const card=document.createElement('div');
+  card.className='proj-card';
+  const tagsHtml=p.tags.map((t,i)=>`<span class="ptag${p.hot.includes(i)?' hot':''}">${t}</span>`).join('');
+  const impHtml=p.impact.map(m=>`<span class="imp">${m}</span>`).join('');
+  card.innerHTML=`
+    <div class="proj-header">
+      <div class="proj-icon">${p.icon}</div>
+      <div class="proj-domain">${p.domain}</div>
+    </div>
+    <div class="proj-name">${p.name}</div>
+    <div class="proj-tags">${tagsHtml}</div>
+    <div class="proj-impact">${impHtml}</div>
+    <div class="proj-divider"></div>
+    <div class="proj-text">${p.text}</div>
+    <button class="proj-toggle" data-idx="${idx}">Read more ↓</button>
+  `;
+  grid.appendChild(card);
+});
+
+document.querySelectorAll('.proj-toggle').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    const card=this.closest('.proj-card');
+    const expanded=card.classList.toggle('expanded');
+    this.textContent=expanded?'Read less ↑':'Read more ↓';
+  });
+});
+
+// Stagger reveal cards
+const cardObserver=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>{e.target.style.opacity=1;e.target.style.transform='none'},i*80);
+    }
+  });
+},{threshold:0.05});
+document.querySelectorAll('.proj-card,.skill-card,.ach-card,.tl-item,.cert').forEach(el=>{
+  el.style.opacity=0;
+  el.style.transform='translateY(24px)';
+  el.style.transition='opacity .6s ease, transform .6s ease';
+  cardObserver.observe(el);
+});
+</script>
+</body>
+</html>
